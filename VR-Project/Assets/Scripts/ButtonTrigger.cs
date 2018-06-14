@@ -12,7 +12,7 @@ public class ButtonTrigger : MonoBehaviour {
 	}
 
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.name == "Cube") {
+        if (other.gameObject.layer ==LayerMask.NameToLayer ("Button")) {
             var b = Instantiate(spawnObject);
             b.transform.position = spawnLocation.position;
         }

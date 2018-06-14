@@ -13,12 +13,12 @@ public class HapticPulse : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        device = SteamVR_Controller.Input((int)trackedObject.index);
-        if (hapticFlag) {
-            device.TriggerHapticPulse(500);
-        }
-	}
+	//void Update () {
+ //       device = SteamVR_Controller.Input((int)trackedObject.index);
+ //       if (hapticFlag) {
+ //           device.TriggerHapticPulse(500);
+ //       }
+	//}
     void OnTriggerEnter() {
         hapticFlag = true;
     }

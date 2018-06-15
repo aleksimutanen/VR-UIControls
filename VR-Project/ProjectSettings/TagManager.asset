@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - FxTemporaire
-  - Button
   layers:
   - Default
   - TransparentFX
@@ -16,8 +15,8 @@ TagManager:
   - 
   - 
   - Button
-  - RandomMesh
-  - MeshWalls
+  - Roof
+  - 
   - 
   - 
   - 

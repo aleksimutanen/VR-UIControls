@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class MeshTrigger : MonoBehaviour {
 
+    MeshTriggerManager mtm;
     public string target;
     public Light spotLight;
+    bool triggerActivated = false;
 
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+    void Start() {
+        mtm = FindObjectOfType<MeshTriggerManager>();
+    }
     void OnTriggerEnter(Collider other) {
-        if (other.gameObject.name == target) {
-            print("xd");
+        if (other.gameObject.name == target && triggerActivated == false) {
             spotLight.intensity = 5f;
-            spotLight.spotAngle = spotLight.spotAngle * 2;
+            spotLight.spotAngle = spotLight.spotAngle * 1.2f;
+            triggerActivated = true;
+            mtm.TriggerActivated(this);
         }
     }
     //void OnTriggerEnter(Collider other) {

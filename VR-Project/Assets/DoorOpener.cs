@@ -9,6 +9,7 @@ public class DoorOpener : MonoBehaviour {
     Vector3 endPos;
     public float openspeed;
     public float closespeed;
+    public RoomChanger rc;
 
     private void Start() {
         startPos = door.position;
@@ -16,9 +17,10 @@ public class DoorOpener : MonoBehaviour {
     }
 
 
-    private void OnTriggerStay(Collider other) {
+    public void OnTriggerStay(Collider other) {
         if (door.position != endPos) {
             door.transform.position = Vector3.MoveTowards(door.position, endPos, Time.deltaTime * openspeed);
+            rc.eventDone = true;
         }
 
     }

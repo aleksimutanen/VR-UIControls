@@ -124,6 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4356271448615104}
   - component: {fileID: 114356700277427640}
+  - component: {fileID: 114985854438236486}
   - component: {fileID: 114880386628318718}
   m_Layer: 0
   m_Name: Controller (right)
@@ -577,6 +578,18 @@ MonoBehaviour:
   padPressed: 0
   padTouched: 0
   gripped: 0
+--- !u!114 &114985854438236486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1917742956445962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e72425ec6f7354f9ef151a3426353c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tc: {fileID: 0}
 --- !u!124 &124063537825316580
 Behaviour:
   m_ObjectHideFlags: 1

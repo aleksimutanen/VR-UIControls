@@ -17,15 +17,20 @@ public class WandController : MonoBehaviour {
     void Update() {
         if (tc.triggerPressed && grabbableInCol) {
             //jos colliderissa grabbable object ota se käteen
-            //grabbed.velo
+            grabbed.position = transform.position;
+            grabbed.rotation = transform.rotation;
         }
     }
 
     //checkaa onko colliderissa grabbable object
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.layer == 9) {
+        if (other.gameObject.tag == "Grabbable") {
             grabbableInCol = true;
             grabbed = other.GetComponent<Rigidbody>();
         }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        grabbableInCol = false;
     }
 }

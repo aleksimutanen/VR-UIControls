@@ -19,11 +19,13 @@ public class DoorCloser : MonoBehaviour {
 
 
     private void OnTriggerStay(Collider other) {
-        if (door.position != doorClosed) {
-            door.transform.position = Vector3.MoveTowards(door.position, doorClosed, Time.deltaTime * openspeed);
-        }
-        if (door.name == ("Door2")) {
-            door.transform.position = Vector3.MoveTowards(door.position, doorClosed, Time.deltaTime * openspeed);
+        if (other.tag == "Main Camera") {
+            if (door.position != doorClosed) {
+                door.transform.position = Vector3.MoveTowards(door.position, doorClosed, Time.deltaTime * openspeed);
+            }
+            if (door.name == ("Door2")) {
+                door.transform.position = Vector3.MoveTowards(door.position, doorClosed, Time.deltaTime * openspeed);
+            }
         }
     }
 }

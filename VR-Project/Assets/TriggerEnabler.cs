@@ -7,7 +7,7 @@ public class TriggerEnabler : MonoBehaviour {
     public bool trigger;
 
     public void OnTriggerEnter(Collider other) {
-        if (other.name == "Cube (1)") {
+        if (other.gameObject.tag == "MainCamera") {
             trigger = true;
         }
     }

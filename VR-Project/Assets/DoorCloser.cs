@@ -19,7 +19,9 @@ public class DoorCloser : MonoBehaviour {
 
 
     private void OnTriggerStay(Collider other) {
-        if (other.tag == "Main Camera") {
+        print(other);
+        if (other.gameObject.tag == "MainCamera") {
+            print("jee");
             if (door.position != doorClosed) {
                 door.transform.position = Vector3.MoveTowards(door.position, doorClosed, Time.deltaTime * openspeed);
             }

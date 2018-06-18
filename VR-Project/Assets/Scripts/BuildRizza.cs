@@ -10,8 +10,8 @@ public class BuildRizza : MonoBehaviour {
 
 	void Update () {
         //if(!pt2Done)
-            transform.parent.transform.position += Time.deltaTime * Vector3.forward * 0.1f;
-		
+           // transform.parent.transform.position += Time.deltaTime * Vector3.forward * 0.1f;
+		//TODO: haamuobjektit??
 	}
 
     private void OnCollisionEnter(Collision collision) {

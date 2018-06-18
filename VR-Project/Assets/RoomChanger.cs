@@ -5,9 +5,9 @@ using UnityEngine;
 public class RoomChanger : MonoBehaviour {
 
     public List<GameObject> roomActivity;
-    int i;
+    int i = 0;
     public bool eventDone;
-    TriggerEnabler t1;
+    public TriggerEnabler t1;
     public Transform door2;
     Vector3 startPos;
     Vector3 endPos;
@@ -22,8 +22,7 @@ public class RoomChanger : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (eventDone == true && t1.trigger == true && other.tag == ("Main Camera")) {
-            if (other.name == "Cube (1)") {
+        if (eventDone == true && t1.trigger == true && other.gameObject.tag == ("MainCamera")) {
                 if (i > 0) {
                     roomActivity[i - 1].SetActive(false);
                 }
@@ -33,12 +32,11 @@ public class RoomChanger : MonoBehaviour {
                     eventDone = false;
                 }
                 
-            }
         }
     }
     //Opens door2
     private void OnTriggerStay(Collider other) {
-        if (other.tag == ("Main Camera")) {
+        if (other.gameObject.tag == ("MainCamera")) {
             if (door2.position != endPos) {
                 door2.transform.position = Vector3.MoveTowards(door2.position, endPos, Time.deltaTime * openspeed);
             }

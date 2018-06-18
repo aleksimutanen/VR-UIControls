@@ -30,7 +30,7 @@ public class WandController : MonoBehaviour {
             
             //grabbed.rotation = transform.rotation;
 		} else if (!tc.triggerPressed)  {
-			print ("trigger not pressed");
+			//print ("trigger not pressed");
 
 			if(grabbed && snapped) {
 				grabbed.gameObject.transform.parent = null;
@@ -49,6 +49,8 @@ public class WandController : MonoBehaviour {
             grabbableInCol = true;
             grabbed = other.GetComponent<Rigidbody>();
         }
+
+        //TODO: rizzalle omat hommat other.gameObject.tag == "Rizza"
     }
 
     private void OnTriggerExit(Collider other) {

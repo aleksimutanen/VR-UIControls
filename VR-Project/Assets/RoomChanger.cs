@@ -22,7 +22,7 @@ public class RoomChanger : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (eventDone == true && t1.trigger == true) {
+        if (eventDone == true && t1.trigger == true && other.tag == ("Main Camera")) {
             if (other.name == "Cube (1)") {
                 if (i > 0) {
                     roomActivity[i - 1].SetActive(false);
@@ -36,9 +36,12 @@ public class RoomChanger : MonoBehaviour {
             }
         }
     }
+    //Opens door2
     private void OnTriggerStay(Collider other) {
-        if (door2.position != endPos) {
-            door2.transform.position = Vector3.MoveTowards(door2.position, endPos, Time.deltaTime * openspeed);
+        if (other.tag == ("Main Camera")) {
+            if (door2.position != endPos) {
+                door2.transform.position = Vector3.MoveTowards(door2.position, endPos, Time.deltaTime * openspeed);
+            }
         }
     }
 }

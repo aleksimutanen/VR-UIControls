@@ -8,6 +8,7 @@ public class WandController : MonoBehaviour {
     Collider col;
     bool grabbableInCol = false;
     Rigidbody grabbed;
+	bool snapped;
     //lever?
 
     void Start() {
@@ -17,9 +18,29 @@ public class WandController : MonoBehaviour {
     void Update() {
         if (tc.triggerPressed && grabbableInCol) {
             //jos colliderissa grabbable object ota se käteen
-            grabbed.position = transform.position;
-            grabbed.rotation = transform.rotation;
-        }
+			if (!snapped) {
+				grabbed.position = transform.position;
+				snapped = true;
+				grabbed.useGravity = false;
+				grabbed.isKinematic = true;
+				grabbed.velocity = new Vector3(0,0,0);
+				grabbed.gameObject.transform.parent = gameObject.transform;
+			}
+
+            
+            //grabbed.rotation = transform.rotation;
+		} else if (!tc.triggerPressed)  {
+			print ("trigger not pressed");
+
+			if(grabbed && snapped) {
+				grabbed.gameObject.transform.parent = null;
+				grabbed.useGravity = true;
+				grabbed.isKinematic = false;
+				grabbed = null;
+				snapped = false;
+			} 
+		}
+		
     }
 
     //checkaa onko colliderissa grabbable object
@@ -32,5 +53,6 @@ public class WandController : MonoBehaviour {
 
     private void OnTriggerExit(Collider other) {
         grabbableInCol = false;
+
     }
 }

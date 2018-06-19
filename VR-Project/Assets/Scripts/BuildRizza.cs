@@ -10,7 +10,7 @@ public class BuildRizza : MonoBehaviour {
 
 	void Update () {
         //if(!pt2Done)
-           // transform.parent.transform.position += Time.deltaTime * Vector3.forward * 0.1f;
+           //transform.parent.transform.position += Time.deltaTime * Vector3.forward * 0.1f;
 		//TODO: haamuobjektit??
 	}
 
@@ -18,18 +18,18 @@ public class BuildRizza : MonoBehaviour {
         print("collision detected " + collision.gameObject);
         if (!pt2Done && collision.transform.name == "Rizza pt 2") {
             print("rizzas touching " + collision.gameObject);
-            collision.gameObject.transform.parent = transform.parent;
-            collision.gameObject.transform.rotation = transform.rotation;
-            collision.gameObject.transform.position = snapPoint.transform.position; //
+            collision.transform.parent = transform.parent;
+            collision.transform.rotation = transform.rotation;
+            collision.transform.position = snapPoint.transform.position; //
             collision.gameObject.tag = "Untagged";
             pt2Done = true;
         }
         if (collision.gameObject.name == "Rizza pt 3" && pt2Done) {
             print("kolmas osa");
-            collision.gameObject.transform.parent = transform.parent;
-            collision.gameObject.transform.rotation = transform.rotation;
-            collision.gameObject.transform.rotation = Quaternion.Euler(-80, 0, 0);
-            collision.gameObject.transform.position = snapPoint2.transform.position;
+            collision.transform.parent = transform.parent;
+            collision.transform.rotation = transform.rotation;
+            collision.transform.rotation = Quaternion.Euler(-80, 0, 0);
+            collision.transform.position = snapPoint2.transform.position;
             collision.gameObject.tag = "Untagged";
         }
 

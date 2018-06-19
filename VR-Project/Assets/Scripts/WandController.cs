@@ -7,7 +7,8 @@ public class WandController : MonoBehaviour {
     public SteamVR_TrackedController tc;
     Collider col;
     bool grabbableInCol = false;
-    Rigidbody grabbed;
+    GameObject grabbed;
+    Rigidbody rb;
 	bool snapped;
     //lever?
 
@@ -19,12 +20,12 @@ public class WandController : MonoBehaviour {
         if (tc.triggerPressed && grabbableInCol) {
             //jos colliderissa grabbable object ota se käteen
 			if (!snapped) {
-				grabbed.position = transform.position;
+				rb.position = transform.position;
 				snapped = true;
-				grabbed.useGravity = false;
-				grabbed.isKinematic = true;
-				grabbed.velocity = new Vector3(0,0,0);
-				grabbed.gameObject.transform.parent = gameObject.transform;
+				rb.useGravity = false;
+				rb.isKinematic = true;
+				rb.velocity = new Vector3(0,0,0);
+				grabbed.transform.parent = transform;
 			}
 
             
@@ -33,10 +34,11 @@ public class WandController : MonoBehaviour {
 			//print ("trigger not pressed");
 
 			if(grabbed && snapped) {
-				grabbed.gameObject.transform.parent = null;
-				grabbed.useGravity = true;
-				grabbed.isKinematic = false;
+				grabbed.transform.parent = null;
+				rb.useGravity = true;
+				rb.isKinematic = false;
 				grabbed = null;
+                rb = null;
 				snapped = false;
 			} 
 		}
@@ -45,16 +47,35 @@ public class WandController : MonoBehaviour {
 
     //checkaa onko colliderissa grabbable object
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag == "Grabbable") {
+        if (other.gameObject.tag == "Grabbable" || other.gameObject.tag == "Rizza") {
             grabbableInCol = true;
-            grabbed = other.GetComponent<Rigidbody>();
+            if (other.gameObject.transform.parent) {
+                grabbed = other.transform.parent.gameObject;
+            }
+            else {
+                grabbed = other.gameObject;
+            }
+            rb = other.GetComponent<Rigidbody>();
         }
+    }
 
-        //TODO: rizzalle omat hommat other.gameObject.tag == "Rizza"
+    private void OnTriggerStay(Collider other) {
+        if (other.gameObject.tag == "Untagged") {
+            grabbableInCol = false;
+            grabbed = null;
+            rb = null;
+            snapped = false;
+        }
     }
 
     private void OnTriggerExit(Collider other) {
         grabbableInCol = false;
 
+    }
+
+    public void Throw(Vector3 dir) {
+        if (rb && grabbed.tag == "Grabbable") {
+            rb.velocity = dir;
+        }
     }
 }

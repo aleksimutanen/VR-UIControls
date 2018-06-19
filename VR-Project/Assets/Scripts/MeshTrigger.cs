@@ -18,6 +18,9 @@ public class MeshTrigger : MonoBehaviour {
             spotLight.spotAngle = spotLight.spotAngle * 1.2f;
             triggerActivated = true;
             mtm.TriggerActivated(this);
+        } else if (other.gameObject.tag == "Grabbable" && other.gameObject.name != target) {
+            //print("fail");
+            //playsound or something
         }
     }
     //void OnTriggerEnter(Collider other) {

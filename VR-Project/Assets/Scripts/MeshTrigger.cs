@@ -19,7 +19,7 @@ public class MeshTrigger : MonoBehaviour {
     }
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.name == target && triggerActivated == false) {
-            spotLight.intensity = 5f;
+            spotLight.intensity = 3f;
             spotLight.spotAngle = spotLight.spotAngle * 1.2f;
             triggerActivated = true;
             mtm.TriggerActivated(this);

@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoomChanger : MonoBehaviour {
 
     public List<GameObject> roomActivity;
-    int i = 0;
+    int i;
     public bool eventDone;
     public TriggerEnabler t1;
     public Transform door2;
@@ -18,7 +18,7 @@ public class RoomChanger : MonoBehaviour {
         t1 = FindObjectOfType<TriggerEnabler>();
         startPos = door2.position;
         endPos += door2.position + new Vector3(1.2f, 0, 0);
-
+        i = 1;
     }
 
     private void OnTriggerEnter(Collider other) {

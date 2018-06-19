@@ -11,6 +11,7 @@ public class WandController : MonoBehaviour {
 	bool snapped;
     LeverScript ls;
     bool handleInCol = false;
+    Transform prevParent;
     //lever?
 
     void Start() {
@@ -30,7 +31,8 @@ public class WandController : MonoBehaviour {
 				grabbed.useGravity = false;
 				grabbed.isKinematic = true;
 				grabbed.velocity = new Vector3(0,0,0);
-				grabbed.gameObject.transform.parent = gameObject.transform;
+                prevParent = grabbed.gameObject.transform.parent;
+                grabbed.gameObject.transform.parent = gameObject.transform;
 			}
 
             
@@ -44,7 +46,7 @@ public class WandController : MonoBehaviour {
             }
 
 			if(grabbed && snapped) {
-				grabbed.gameObject.transform.parent = null;
+				grabbed.gameObject.transform.parent = prevParent;
 				grabbed.useGravity = true;
 				grabbed.isKinematic = false;
 				grabbed = null;
@@ -80,4 +82,6 @@ public class WandController : MonoBehaviour {
             handleInCol = false;
         }
     }
+
+    //heitto: edellinen paikka - nmykyinen paikka -> vauhtivektoriksi
 }

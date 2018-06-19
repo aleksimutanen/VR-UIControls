@@ -6,13 +6,14 @@ public class MeshTriggerManager : MonoBehaviour {
 
     bool triggersActivated = false;
     public List<MeshTrigger> triggerList = new List<MeshTrigger>();
-    DoorOpener dooropener;
+    public DoorOpener dooropener;
 
 	void Start () {
 		
 	}
 
     void Update() {
+        //tähän joku timeri
         if (triggersActivated) {
             dooropener.OpenDoor();
         }    

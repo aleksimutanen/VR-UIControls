@@ -12,6 +12,7 @@ public class LeverScript : MonoBehaviour {
     public UnityEvent switchOn;
     public UnityEvent switchOff;
     public bool yesUse;
+    public DoorOpener dooropener;
 
     public bool isActivated;
 
@@ -44,12 +45,18 @@ public class LeverScript : MonoBehaviour {
                 isActivated = false;
                 print("jes");
                 switchOff.Invoke();
+
             }
             else if (angle <= -30 && !isActivated)
             {
                 isActivated = true;
                 print("jos");
                 switchOn.Invoke();
+
+            }
+            if(isActivated)
+            {
+                dooropener.OpenDoor();
             }
         }
         

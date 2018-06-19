@@ -25,7 +25,9 @@ public class DoorOpener : MonoBehaviour {
 
     }
     public void OpenDoor() {
-        door.transform.position = Vector3.MoveTowards(door.position, endPos, Time.deltaTime * openspeed);
-        rc.eventDone = true;
+        if (door.position != endPos) {
+            door.transform.position = Vector3.MoveTowards(door.position, endPos, Time.deltaTime * openspeed);
+            rc.eventDone = true;
+        }
     }
 }

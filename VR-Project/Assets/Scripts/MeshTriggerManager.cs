@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeshTriggerManager : MonoBehaviour {
 
-    bool triggersActivated = false;
+    public bool doorTriggerActive = false;
     public List<MeshTrigger> triggerList = new List<MeshTrigger>();
     public DoorOpener dooropener;
 
@@ -14,7 +14,7 @@ public class MeshTriggerManager : MonoBehaviour {
 
     void Update() {
         //tähän joku timeri
-        if (triggersActivated) {
+        if (doorTriggerActive) {
             dooropener.OpenDoor();
         }    
     }
@@ -24,7 +24,7 @@ public class MeshTriggerManager : MonoBehaviour {
         print("trigger added");
         if (triggerList.Count == 3) {
             print("xd");
-            triggersActivated = true;
+            doorTriggerActive = true;
             //dosomething
         }
     }

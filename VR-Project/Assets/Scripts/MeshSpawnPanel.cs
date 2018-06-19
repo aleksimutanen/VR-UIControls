@@ -10,6 +10,7 @@ public class MeshSpawnPanel : MonoBehaviour {
     public int maxWrongThreshold;
     int index = 0;
     public Transform folder;
+    public string spawnAudioEvent;
 
     void Start() {
 
@@ -27,12 +28,15 @@ public class MeshSpawnPanel : MonoBehaviour {
             b.transform.position = spawnLocation.position + new Vector3(Random.Range(0f, 0.5f), 0, Random.Range(0f, 0.5f));
             meshSpawn++;
             other.GetComponent<Renderer>().material.color = Color.red;
+            Fabric.EventManager.Instance.PostEvent(spawnAudioEvent);
         } else if (meshSpawn >= maxWrongThreshold && other.gameObject.name == "MeshSpawnButton") {
             print("spawn correct");
             var c = Instantiate(spawnObject[0 + index]);
             c.transform.parent = folder;
             c.transform.position = spawnLocation.position + new Vector3(Random.Range(0f, 0.5f), 0, Random.Range(0f, 0.5f));
             index++;
+            Fabric.EventManager.Instance.PostEvent(spawnAudioEvent);
+
         }
     }
 

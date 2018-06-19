@@ -10,6 +10,8 @@ public class DoorCloser : MonoBehaviour {
     public float openspeed;
     public float closespeed;
 
+    public string closeAudioEvent;
+
     private void Start() {
         doorOpen = door.position;
         doorClosed = doorOpen + new Vector3(0, 0, 0);
@@ -24,9 +26,12 @@ public class DoorCloser : MonoBehaviour {
             print("jee");
             if (door.position != doorClosed) {
                 door.transform.position = Vector3.MoveTowards(door.position, doorClosed, Time.deltaTime * openspeed);
+                Fabric.EventManager.Instance.PostEvent(closeAudioEvent);
             }
             if (door.name == ("Door2")) {
                 door.transform.position = Vector3.MoveTowards(door.position, doorClosed, Time.deltaTime * openspeed);
+                Fabric.EventManager.Instance.PostEvent(closeAudioEvent);
+
             }
         }
     }

@@ -17,6 +17,7 @@ TagManager:
   - Rooster
   - Sheep
   - Wolf
+  - Handle
   layers:
   - Default
   - TransparentFX

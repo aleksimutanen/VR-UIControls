@@ -12,6 +12,8 @@ public class LeverScript : MonoBehaviour {
     public UnityEvent switchOn;
     public UnityEvent switchOff;
 
+    public bool isActivated;
+
     // Use this for initialization
     void Start () {
 		
@@ -34,12 +36,14 @@ public class LeverScript : MonoBehaviour {
             angle *= -1;
         }
 
-        if (angle >= 30) {
+        if (angle >= 30 && isActivated) {
+            isActivated = false;
             print("jes");
-            switchOn.Invoke();
-        } else if (angle <= -30) {
+            switchOff.Invoke();
+        } else if (angle <= -30 && !isActivated) {
+            isActivated = true;
             print("jos");
-            switchOff.Invoke(); }
+            switchOn.Invoke(); }
         // did we just move to activation zone?
         // if ...
         // switchOn.Invoke();

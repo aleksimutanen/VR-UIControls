@@ -342,6 +342,7 @@ GameObject:
   - component: {fileID: 4243358214894124}
   - component: {fileID: 114301250869228672}
   - component: {fileID: 114168266619121026}
+  - component: {fileID: 114947305426053636}
   m_Layer: 0
   m_Name: Fabric Manager
   m_TagString: Untagged
@@ -1272,7 +1273,7 @@ MonoBehaviour:
   _pan2DRandomization: 0
   _override3DProperties: 0
   _priority: 128
-  _panLevel: 1
+  _panLevel: 0
   _spreadLevel: 0
   _spatialize: 0
   _dopplerLevel: 1
@@ -2824,7 +2825,7 @@ MonoBehaviour:
   _stealingBehaviour: 0
   _minimumPlaybackInterval: 0
   _overrideParentVolume: 0
-  _volume: 1
+  _volume: 0.5495409
   _volumeRandomization: 0
   _mute: 0
   _overrideParentPitch: 0
@@ -2900,7 +2901,7 @@ MonoBehaviour:
   _audioClipAssetPath: 0
   _delay: 0
   _delayInBeats: 0
-  _loop: 0
+  _loop: 1
   _ignoreNativeLoop: 0
   _randomizeStart: 0
   _randomizeStartPercentage: 100
@@ -3586,6 +3587,18 @@ MonoBehaviour:
     _transitionToSnapshotData:
       _snapshot: 
       _timeToReach: 0
+--- !u!114 &114947305426053636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1920475396099756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f6630c98262729439898ad0ca7d7ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BGM: Muzak
 --- !u!114 &114976017363022330
 MonoBehaviour:
   m_ObjectHideFlags: 1

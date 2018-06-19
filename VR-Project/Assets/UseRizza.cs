@@ -11,7 +11,7 @@ public class UseRizza : MonoBehaviour {
     void Update () {
 		if (inUse && !tc.triggerPressed) {
             //heitä asia
-            wc.Throw(transform.position + transform.forward);
+            //wc.Throw(transform.position + transform.forward);
             print(transform.position + transform.forward);
             inUse = false;
         }

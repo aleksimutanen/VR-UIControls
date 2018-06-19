@@ -5,8 +5,13 @@ using UnityEngine;
 public class MeshTrigger : MonoBehaviour {
 
     MeshTriggerManager mtm;
+
     public string target;
+    public string successAudioEvent;
+    public string failAudioEvent;
+
     public Light spotLight;
+
     bool triggerActivated = false;
 
     void Start() {
@@ -18,7 +23,10 @@ public class MeshTrigger : MonoBehaviour {
             spotLight.spotAngle = spotLight.spotAngle * 1.2f;
             triggerActivated = true;
             mtm.TriggerActivated(this);
+            Fabric.EventManager.Instance.PostEvent(successAudioEvent);
+
         } else if (other.gameObject.tag == "Grabbable" && other.gameObject.name != target) {
+            Fabric.EventManager.Instance.PostEvent(failAudioEvent);
             //print("fail");
             //playsound or something
         }

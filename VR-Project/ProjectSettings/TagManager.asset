@@ -8,6 +8,16 @@ TagManager:
   - Grabbable
   - Button
   - Rizza
+  - Cat
+  - Cow
+  - Dog
+  - Frog
+  - Lion
+  - Pig
+  - Rooster
+  - Sheep
+  - Wolf
+  - Handle
   layers:
   - Default
   - TransparentFX

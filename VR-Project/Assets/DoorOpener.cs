@@ -10,10 +10,14 @@ public class DoorOpener : MonoBehaviour {
     public float openspeed;
     public float closespeed;
     public RoomChanger rc;
+    MeshTriggerManager mtm;
+
+    public string doorAudioEvent;
 
     private void Start() {
         startPos = door.position;
         endPos += door.position + new Vector3(0, 0, 1.2f);
+        mtm = FindObjectOfType<MeshTriggerManager>();
     }
 
 
@@ -21,7 +25,20 @@ public class DoorOpener : MonoBehaviour {
         if (door.position != endPos) {
             door.transform.position = Vector3.MoveTowards(door.position, endPos, Time.deltaTime * openspeed);
             rc.eventDone = true;
+            Fabric.EventManager.Instance.PostEvent(doorAudioEvent);
         }
 
+    }
+    public void OpenDoor() {
+        if (door.position != endPos) {
+            door.transform.position = Vector3.MoveTowards(door.position, endPos, Time.deltaTime * openspeed);
+            rc.eventDone = true;
+            Fabric.EventManager.Instance.PostEvent(doorAudioEvent);
+        }
+        if (door.position == endPos) {
+
+            mtm.doorTriggerActive = false;
+
+        }
     }
 }

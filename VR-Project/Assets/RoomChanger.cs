@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoomChanger : MonoBehaviour {
 
     public List<GameObject> roomActivity;
-    int i = 0;
+    int i;
     public bool eventDone;
     public TriggerEnabler t1;
     public Transform door2;
@@ -13,17 +13,19 @@ public class RoomChanger : MonoBehaviour {
     Vector3 endPos;
     public float openspeed;
     public float closespeed;
+    public string openAudioEvent;
 
     private void Start() {
         t1 = FindObjectOfType<TriggerEnabler>();
         startPos = door2.position;
         endPos += door2.position + new Vector3(1.2f, 0, 0);
-
+        i = 1;
     }
 
     private void OnTriggerEnter(Collider other) {
+        Fabric.EventManager.Instance.PostEvent(openAudioEvent);
         if (eventDone == true && t1.trigger == true && other.gameObject.tag == ("MainCamera")) {
-                if (i > 0) {
+            if (i > 0) {
                     roomActivity[i - 1].SetActive(false);
                 }
                 if (i < roomActivity.Count) {
@@ -35,6 +37,7 @@ public class RoomChanger : MonoBehaviour {
         }
     }
     //Opens door2
+
     private void OnTriggerStay(Collider other) {
         if (other.gameObject.tag == ("MainCamera")) {
             if (door2.position != endPos) {

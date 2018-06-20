@@ -12,6 +12,8 @@ public class WandController : MonoBehaviour {
     LeverScript ls;
     bool handleInCol = false;
     Transform prevParent;
+    public string pickupAudioEvent;
+    public string putdownAudioEvent;
     //lever?
 
     void Start() {
@@ -27,6 +29,7 @@ public class WandController : MonoBehaviour {
             }
             //jos colliderissa grabbable object ota se käteen
 			if (grabbableInCol && !snapped) {
+                Fabric.EventManager.Instance.PostEvent(pickupAudioEvent);
 				grabbed.position = transform.position;
 				snapped = true;
 				grabbed.useGravity = false;
@@ -48,6 +51,7 @@ public class WandController : MonoBehaviour {
             }
 
 			if(grabbed && snapped) {
+                Fabric.EventManager.Instance.PostEvent(putdownAudioEvent);
 				grabbed.gameObject.transform.parent = prevParent;
 				grabbed.useGravity = true;
 				grabbed.isKinematic = false;

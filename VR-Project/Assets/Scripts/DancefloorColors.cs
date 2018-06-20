@@ -41,13 +41,13 @@ public class DancefloorColors : MonoBehaviour {
             phase = 0;
         }
         else if (p == oneByOne[i] && phase == 0) {
-
-            GetComponent<Renderer>().material.color = new Color((5.0f + colors[i].x) * 0.07f, (5.0f + colors[i].x)*0.4f, 0.5f);
+            //vihree
+            GetComponent<Renderer>().material.color = new Color((/*5.0f + */1 + colors[i].x) * 0.07f, (1.0f + colors[i].x)*0.4f, 0.75f);
             //tämä muuttaa vektorin väriksi
             i++;
         }
         else if (p == oneByOne[i] && phase == 1) {
-            GetComponent<Renderer>().material.color = new Color((5.0f + colors[i].x) * 0.6f, 0.5f, (5.0f + colors[i].x)*0.07f);
+            GetComponent<Renderer>().material.color = new Color((/*5.0f + */1 + colors[i].x) * 0.5f, .9f, (7.0f + colors[i].x)*0.7f);
             //tämä muuttaa vektorin väriksi
             i++;
         }

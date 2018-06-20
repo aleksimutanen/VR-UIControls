@@ -10,6 +10,7 @@ public class DoorCloser : MonoBehaviour {
     public float openspeed;
     public float closespeed;
     MeshTriggerManager mtm;
+    public LeverScript ls;
 
     public string closeAudioEvent;
 
@@ -25,6 +26,8 @@ public class DoorCloser : MonoBehaviour {
     private void OnTriggerStay(Collider other) { 
         if (other.gameObject.tag == "MainCamera") {
             mtm = FindObjectOfType<MeshTriggerManager>();
+            ls.isActivated = false;
+            ls.yesUse = false;
             if (mtm)
             {
                 mtm.doorTriggerActive = false;
@@ -37,7 +40,6 @@ public class DoorCloser : MonoBehaviour {
             if (door.name == ("Door2")) {
                 door.transform.position = Vector3.MoveTowards(door.position, doorClosed, Time.deltaTime * openspeed);
                 Fabric.EventManager.Instance.PostEvent(closeAudioEvent);
-
             }
         }
     }

@@ -15,6 +15,7 @@ public class LeverScript : MonoBehaviour {
     public DoorOpener dooropener;
     public Vector3 dir;
     Vector3 prevHandPos;
+    Vector3 pointInPivotCoords;
 
     public bool isActivated;
 
@@ -26,8 +27,11 @@ public class LeverScript : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         if(yesUse) {
-            //print("ei tartuttu " + prevHandPos);
-            var pointInPivotCoords = transform.InverseTransformPoint(prevHandPos);
+            if(hand == null)
+            {
+                print("ei tartuttu " + prevHandPos);
+                pointInPivotCoords = transform.InverseTransformPoint(prevHandPos);
+            }
             if ( hand) {
                 pointInPivotCoords = transform.InverseTransformPoint(hand.position);
                 prevHandPos = hand.position;
@@ -64,7 +68,7 @@ public class LeverScript : MonoBehaviour {
             }
             if(isActivated)
             {
-                //print("vipu aktivoitu ja ovi aukeaa");
+                print("vipu aktivoitu ja ovi aukeaa");
                 dooropener.OpenDoor();
             }
         }

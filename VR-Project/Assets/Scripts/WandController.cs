@@ -23,6 +23,7 @@ public class WandController : MonoBehaviour {
             if(handleInCol)
             {
                 ls.yesUse = true;
+                ls.hand = tc.transform;
             }
             //jos colliderissa grabbable object ota se käteen
 			if (grabbableInCol && !snapped) {
@@ -42,7 +43,8 @@ public class WandController : MonoBehaviour {
 
             if(handleInCol)
             {
-                ls.yesUse = false;
+                //ls.yesUse = false;
+                ls.hand = null;
             }
 
 			if(grabbed && snapped) {
@@ -78,7 +80,8 @@ public class WandController : MonoBehaviour {
         if (other.gameObject.tag == "Handle")
         {
             ls = other.gameObject.GetComponentInParent<LeverScript>();
-            ls.yesUse = false;
+            //ls.yesUse = false;
+            ls.hand = null;
             handleInCol = false;
         }
     }

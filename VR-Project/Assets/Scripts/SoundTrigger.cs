@@ -19,6 +19,7 @@ public class SoundTrigger : MonoBehaviour {
 
     DoorOpener dop;
     MeshTriggerManager mtm;
+    Renderer rend;
     //public Text testing;
     //public Text testing2;
     //public float[] playInterval;
@@ -41,10 +42,11 @@ public class SoundTrigger : MonoBehaviour {
             //testing.text += rightCode[i] + " ";
             //PlaySounds();
         }
-        for (int i = 0; i < animalSprites.Length; i++)
-        {
+        for (int i = 0; i < animalSprites.Length; i++) {
             animalSprites[i].GetComponent<Renderer>().material.color = Color.black;
+            buttons[i].GetComponent<Renderer>().material.color = Color.grey;
         }
+        rend = GetComponent<Renderer>();
         mtm = FindObjectOfType<MeshTriggerManager>();
     }
 
@@ -73,12 +75,14 @@ public class SoundTrigger : MonoBehaviour {
             Fabric.EventManager.Instance.PostEvent(buttonAudioEvent);
             print("applied sounds reset");
         } else if (other.gameObject.name == "PlayAgain") {
-            for (int i = 0; i < animalSprites.Length; i++)
-            {
-                animalSprites[i].GetComponent<Renderer>().material.color = Color.white;
+            if (Color.grey == buttons[0].GetComponent<Renderer>().material.color) {
+                print("color changed");
+                for (int i = 0; i < animalSprites.Length; i++) {
+                    animalSprites[i].GetComponent<Renderer>().material.color = Color.white;
+                    buttons[i].GetComponent<Renderer>().material.color = Color.cyan;
+                }
             }
             Fabric.EventManager.Instance.PostEvent(buttonAudioEvent);
-
             other.GetComponent<Renderer>().material.color = Color.yellow;
             PlaySounds();
         }

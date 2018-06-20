@@ -8,15 +8,17 @@ public class SoundTrigger : MonoBehaviour {
     List<int> appliedCode = new List<int>();
 
     public int codeLength;
+    int correctApplied;
 
     public GameObject[] buttons;
     public AudioSource[] animalAudio;
 
     public Text testing;
+    public Text testing2;
     //public float[] playInterval;
     //public float[] lastPlayed;
 
-    public float playInterval = 3f;
+    public float playInterval = 3.5f;
 
     void Start () {
         if (codeLength > animalAudio.Length) {
@@ -32,30 +34,38 @@ public class SoundTrigger : MonoBehaviour {
             rightCode.Add(rnd);
             testing.text += rightCode[i] + " ";
         }
-        PlaySoundsAtStart();
+        //PlaySounds();
     }
 
-    void PlaySoundsAtStart() {
+    void PlaySounds() {
         for (int i = 0; i < rightCode.Count; i++) {
             animalAudio[rightCode[i]].PlayDelayed(playInterval);
             print(rightCode[i]);
-            playInterval = playInterval + 3f;
+            playInterval = playInterval + 3.5f;
         }
+        playInterval = 3.5f;
     }
 
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.name == "Reset") {
             other.GetComponent<Renderer>().material.color = Color.black;
             appliedCode.Clear();
+            testing2.text = "";
             print("applied sounds reset");
-        } else if (other.gameObject.tag == "Button") { 
+        } else if (other.gameObject.name == "PlayAgain") {
+            other.GetComponent<Renderer>().material.color = Color.yellow;
+            PlaySounds();
+        }
+        else if (other.gameObject.tag == "Button") { 
+            //buttons.indexOf(other.gameObject)
             for (int i = 0; i < buttons.Length; i++) {
                 if (other.gameObject == buttons[i]) {
                     animalAudio[i].Play();
                     buttons[i].GetComponent<Renderer>().material.color = Color.red;
-                    print("button " + buttons[i].name + " hit");
-                    appliedCode.Add(i + 1);
-                    print("number " + (i + 1) + " added");
+                    print("button " + buttons[i] + " hit");
+                    appliedCode.Add(i);
+                    testing2.text += " " + i;
+                    print("number " + (i) + " added");
                 }
             }
         }
@@ -64,6 +74,10 @@ public class SoundTrigger : MonoBehaviour {
                 if (rightCode.Contains(number)) {
                     print(number);
                     print("applied number is right");
+                    correctApplied++;
+                } if (correctApplied == rightCode.Count) {
+                    print("jee");
+                    //dosomething
                 }
             }
         }
@@ -88,8 +102,12 @@ public class SoundTrigger : MonoBehaviour {
             if (other.gameObject == buttons[i]) {
                 buttons[i].GetComponent<Renderer>().material.color = Color.cyan;
             }
-        } if (other.gameObject.name == "Reset") {
-            other.gameObject.GetComponent<Renderer>().material.color = Color.cyan;
+        }
+        if (other.gameObject.name == "Reset") {
+            other.gameObject.GetComponent<Renderer>().material.color = Color.red;
+        }
+        if (other.gameObject.name == "PlayAgain") {
+            other.gameObject.GetComponent<Renderer>().material.color = Color.green;
         }
     }
 }

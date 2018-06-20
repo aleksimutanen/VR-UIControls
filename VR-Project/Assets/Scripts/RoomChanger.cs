@@ -14,6 +14,7 @@ public class RoomChanger : MonoBehaviour {
     public float openspeed;
     public float closespeed;
     public string openAudioEvent;
+    public Audioplay ap;
 
     private void Start() {
         t1 = FindObjectOfType<TriggerEnabler>();
@@ -30,9 +31,13 @@ public class RoomChanger : MonoBehaviour {
                 }
                 if (i < roomActivity.Count) {
                     roomActivity[i].SetActive(true);
+                    if (i == roomActivity.Count - 1) {
+                        ap.StartParty();
+                    }
                     i++;
                     eventDone = false;
                 }
+
                 
         }
     }

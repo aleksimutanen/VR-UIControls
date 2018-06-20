@@ -11,6 +11,7 @@ public class DoorOpener : MonoBehaviour {
     public float closespeed;
     public RoomChanger rc;
     MeshTriggerManager mtm;
+    float distanceThreshold;
 
     public string doorAudioEvent;
 
@@ -30,15 +31,18 @@ public class DoorOpener : MonoBehaviour {
 
     }
     public void OpenDoor() {
-        if (door.position != endPos) {
-            door.transform.position = Vector3.MoveTowards(door.position, endPos, Time.deltaTime * openspeed);
-            rc.eventDone = true;
-            Fabric.EventManager.Instance.PostEvent(doorAudioEvent);
-        }
-        if (door.position == endPos) {
+        if (mtm.doorTriggerActive) {
+            if (door.position != endPos) {
+                door.transform.position = Vector3.MoveTowards(door.position, endPos, Time.deltaTime * openspeed);
+                rc.eventDone = true;
+                Fabric.EventManager.Instance.PostEvent(doorAudioEvent);
+            }
+            //if (door.position == endPos) {
+            //    if (Vector3.Distance(door.position, endPos) < distanceThreshold) {
 
-            mtm.doorTriggerActive = false;
+            //        mtm.doorTriggerActive = false;
 
-        }
+            //    }
+            }
     }
 }

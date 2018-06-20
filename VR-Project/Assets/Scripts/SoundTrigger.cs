@@ -14,6 +14,9 @@ public class SoundTrigger : MonoBehaviour {
     public GameObject[] buttons;
     public AudioSource[] animalAudio;
 
+    public string buttonAudioEvent;
+    public string successAudioEvent;
+
     DoorOpener dop;
     MeshTriggerManager mtm;
     //public Text testing;
@@ -67,12 +70,15 @@ public class SoundTrigger : MonoBehaviour {
             other.GetComponent<Renderer>().material.color = Color.black;
             appliedCode.Clear();
             //testing2.text = "";
+            Fabric.EventManager.Instance.PostEvent(buttonAudioEvent);
             print("applied sounds reset");
         } else if (other.gameObject.name == "PlayAgain") {
             for (int i = 0; i < animalSprites.Length; i++)
             {
                 animalSprites[i].GetComponent<Renderer>().material.color = Color.white;
             }
+            Fabric.EventManager.Instance.PostEvent(buttonAudioEvent);
+
             other.GetComponent<Renderer>().material.color = Color.yellow;
             PlaySounds();
         }
@@ -96,6 +102,7 @@ public class SoundTrigger : MonoBehaviour {
                     print("applied number is right");
                     correctApplied++;
                 } if (correctApplied == rightCode.Count) {
+                    Fabric.EventManager.Instance.PostEvent(successAudioEvent);
                     mtm.doorTriggerActive = true;
                     dop = FindObjectOfType<DoorOpener>();
                     print("jee");

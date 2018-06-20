@@ -10,31 +10,52 @@ public class SoundTrigger : MonoBehaviour {
     public int codeLength;
     int correctApplied;
 
+    public GameObject[] animalSprites;
     public GameObject[] buttons;
     public AudioSource[] animalAudio;
 
-    public Text testing;
-    public Text testing2;
+    public string buttonAudioEvent;
+    public string successAudioEvent;
+
+    DoorOpener dop;
+    MeshTriggerManager mtm;
+    Renderer rend;
+    //public Text testing;
+    //public Text testing2;
     //public float[] playInterval;
     //public float[] lastPlayed;
 
-    public float playInterval = 3.5f;
+    public float playInterval = 1f;
 
     void Start () {
         if (codeLength > animalAudio.Length) {
             Debug.LogError("code too long, not enough unique animals");
             return;
         }
-        testing.text = " ";
+        //testing.text = " ";
         for (int i = 0; i < codeLength; i++) {
             var rnd = Random.Range(0, animalAudio.Length);
             while (rightCode.Contains(rnd)) {
                 rnd = Random.Range(0, animalAudio.Length);
             }
             rightCode.Add(rnd);
-            testing.text += rightCode[i] + " ";
+            //testing.text += rightCode[i] + " ";
+            //PlaySounds();
         }
-        //PlaySounds();
+        for (int i = 0; i < animalSprites.Length; i++) {
+            animalSprites[i].GetComponent<Renderer>().material.color = Color.black;
+            buttons[i].GetComponent<Renderer>().material.color = Color.grey;
+        }
+        rend = GetComponent<Renderer>();
+        mtm = FindObjectOfType<MeshTriggerManager>();
+    }
+
+    void Update()
+    {
+        if (mtm.doorTriggerActive)
+        {
+            dop.OpenDoor();
+        }    
     }
 
     void PlaySounds() {
@@ -43,16 +64,25 @@ public class SoundTrigger : MonoBehaviour {
             print(rightCode[i]);
             playInterval = playInterval + 3.5f;
         }
-        playInterval = 3.5f;
+        playInterval = 1f;
     }
 
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.name == "Reset") {
             other.GetComponent<Renderer>().material.color = Color.black;
             appliedCode.Clear();
-            testing2.text = "";
+            //testing2.text = "";
+            Fabric.EventManager.Instance.PostEvent(buttonAudioEvent);
             print("applied sounds reset");
         } else if (other.gameObject.name == "PlayAgain") {
+            if (Color.grey == buttons[0].GetComponent<Renderer>().material.color) {
+                print("color changed");
+                for (int i = 0; i < animalSprites.Length; i++) {
+                    animalSprites[i].GetComponent<Renderer>().material.color = Color.white;
+                    buttons[i].GetComponent<Renderer>().material.color = Color.cyan;
+                }
+            }
+            Fabric.EventManager.Instance.PostEvent(buttonAudioEvent);
             other.GetComponent<Renderer>().material.color = Color.yellow;
             PlaySounds();
         }
@@ -64,7 +94,7 @@ public class SoundTrigger : MonoBehaviour {
                     buttons[i].GetComponent<Renderer>().material.color = Color.red;
                     print("button " + buttons[i] + " hit");
                     appliedCode.Add(i);
-                    testing2.text += " " + i;
+                    //testing2.text += " " + i;
                     print("number " + (i) + " added");
                 }
             }
@@ -76,6 +106,9 @@ public class SoundTrigger : MonoBehaviour {
                     print("applied number is right");
                     correctApplied++;
                 } if (correctApplied == rightCode.Count) {
+                    Fabric.EventManager.Instance.PostEvent(successAudioEvent);
+                    mtm.doorTriggerActive = true;
+                    dop = FindObjectOfType<DoorOpener>();
                     print("jee");
                     //dosomething
                 }

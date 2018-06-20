@@ -9,8 +9,8 @@ public class RoomChanger : MonoBehaviour {
     public bool eventDone;
     public TriggerEnabler t1;
     public Transform door2;
-    Vector3 startPos;
-    Vector3 endPos;
+    public Vector3 startPos;
+    public Vector3 endPos;
     public float openspeed;
     public float closespeed;
     public string openAudioEvent;

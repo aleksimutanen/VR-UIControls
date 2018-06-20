@@ -18,13 +18,17 @@ public class DoorCloser : MonoBehaviour {
         doorClosed = doorOpen + new Vector3(0, 0, 0);
         //endPos = door.position;
         //startPos += door.position + new Vector3(0, 0, -0.6f);
-        mtm = FindObjectOfType<MeshTriggerManager>();
+
     }
 
 
     private void OnTriggerStay(Collider other) { 
         if (other.gameObject.tag == "MainCamera") {
-            mtm.doorTriggerActive = false;
+            mtm = FindObjectOfType<MeshTriggerManager>();
+            if (mtm)
+            {
+                mtm.doorTriggerActive = false;
+            }
             print("jee");
             if (door.position != doorClosed) {
                 door.transform.position = Vector3.MoveTowards(door.position, doorClosed, Time.deltaTime * openspeed);

@@ -9,6 +9,7 @@ public class DoorCloser : MonoBehaviour {
     Vector3 doorClosed;
     public float openspeed;
     public float closespeed;
+    MeshTriggerManager mtm;
 
     public string closeAudioEvent;
 
@@ -17,12 +18,13 @@ public class DoorCloser : MonoBehaviour {
         doorClosed = doorOpen + new Vector3(0, 0, 0);
         //endPos = door.position;
         //startPos += door.position + new Vector3(0, 0, -0.6f);
+        mtm = FindObjectOfType<MeshTriggerManager>();
     }
 
 
-    private void OnTriggerStay(Collider other) {
-        print(other);
+    private void OnTriggerStay(Collider other) { 
         if (other.gameObject.tag == "MainCamera") {
+            mtm.doorTriggerActive = false;
             print("jee");
             if (door.position != doorClosed) {
                 door.transform.position = Vector3.MoveTowards(door.position, doorClosed, Time.deltaTime * openspeed);

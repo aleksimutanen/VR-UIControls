@@ -35,6 +35,9 @@ public class MeshSpawnPanel : MonoBehaviour {
             c.transform.parent = folder;
             c.transform.position = spawnLocation.position + new Vector3(Random.Range(0f, 0.5f), 0, Random.Range(0f, 0.5f));
             index++;
+            if (index == 3) {
+                index = 0;
+            }
             Fabric.EventManager.Instance.PostEvent(spawnAudioEvent);
 
         }
